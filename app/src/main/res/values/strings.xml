@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name" translatable="false">Driver\'s info</string>
+    <string name="enter_number">Enter the state number of your car</string>
+    <string name="enter_vrc">Enter the number of the vehicle registration certificate</string>
+    <string name="enter_dl">Enter your driver\'s license number</string>
+    <string name="disclaimer">The information you entered earlier</string>
+    <string name="question">Do you want to change the data?</string>
+    <string name="car_number">Car number</string>
+    <string name="vrc_number">VRC number</string>
+    <string name="dl_number">License number</string>
+    <string name="save">Save and continue</string>
+    <string name="skip">Skip</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_data">No data available</string>
+    <string name="sure">Are you sure you want to skip this point?</string>
+    <string name="ask_update">Update data</string>
+    <string name="ask_update_short">Update</string>
+    <string name="update">Are you sure you want to update the content?\nAll past data will be erased</string>
+    <string name="error_number">The number you entered does not fall into any of the categories, try again</string>
+    <string name="error_vrc">The VRC you entered does not fall into any of the categories, please try again</string>
+    <string name="error_dl">The driver\'s license you entered does not fall into any of the categories, please try again</string>
+
+</resources>

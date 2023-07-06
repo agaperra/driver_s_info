@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enter_number">Введите государственный номер вашего автомобиля</string>
+    <string name="enter_vrc">Введите номер свидетельства о регистрации транспортного средства</string>
+    <string name="enter_dl">Введите номер вашего водительского удостоверения</string>
+    <string name="disclaimer">Информация, которую вы ввели ранее</string>
+    <string name="question">Хотите изменить данные?</string>
+    <string name="car_number">Номер машины</string>
+    <string name="vrc_number">Номер СТС</string>
+    <string name="dl_number">Номер ВУ</string>
+    <string name="save">Сохранить и продолжить</string>
+    <string name="skip">Пропустить</string>
+    <string name="cancel">Отмена</string>
+    <string name="no_data">Нет данных</string>
+    <string name="ask_update">Обновить данные</string>
+    <string name="ask_update_short">Обновить</string>
+    <string name="update">Вы уверены, что хотите обновить контент?\nВсе прошлые данные будут стерты</string>
+    <string name="sure">Вы уверены, что хотите пропустить этот пункт?</string>
+    <string name="error_number">Введённый вами номер не попадает не под одну из категорий, попробуйте ещё раз</string>
+    <string name="error_vrc">Введенный вами СТС не попадает ни в одну из категорий, повторите попытку</string>
+    <string name="error_dl">Введенное вами водительское удостоверение не попадает ни в одну из категорий, повторите попытку</string>
+</resources>
