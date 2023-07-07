@@ -7,7 +7,7 @@
 
 ## Возможности
 
-- Ввод государственного номера автомобиля, который может соответствовать одной из трёх категорий - [1,2,5][https://ru.wikipedia.org/wiki/Регистрационные_знаки_транспортных_средств_в_России]
+- Ввод государственного номера автомобиля, который может соответствовать одной из трёх категорий - [1,2,5](https://ru.wikipedia.org/wiki/Регистрационные_знаки_транспортных_средств_в_России)
 - Ввод свидетельства о регистрации транспортного средства
 - Ввод номера водительского удостоверения
 
@@ -24,11 +24,5 @@
 - В качестве инструмента внедрения зависимостей использовался Dagger Hilt
 - В качестве способа разметки использовался фреймфорк Jetpack compose
 
-<img src="https://github.com/agaperra/driver_s_info/blob/master/images/1.jpg" width="150" />
-<img src="https://github.com/agaperra/driver_s_info/blob/master/images/2.jpg" width="150" />
-<img src="https://github.com/agaperra/driver_s_info/blob/master/images/3.jpg" width="150" />
-<img src="https://github.com/agaperra/driver_s_info/blob/master/images/4.jpg" width="150" />
-<img src="https://github.com/agaperra/driver_s_info/blob/master/images/5.jpg" width="150" />
-<img src="https://github.com/agaperra/driver_s_info/blob/master/images/6.jpg" width="150" />
-<img src="https://github.com/agaperra/driver_s_info/blob/master/images/7.jpg" width="150" />
+<img src="https://github.com/agaperra/driver_s_info/blob/master/images/1.jpg" width="150" /> <img src="https://github.com/agaperra/driver_s_info/blob/master/images/2.jpg" width="150" /> <img src="https://github.com/agaperra/driver_s_info/blob/master/images/3.jpg" width="150" /> <img src="https://github.com/agaperra/driver_s_info/blob/master/images/4.jpg" width="150" /> <img src="https://github.com/agaperra/driver_s_info/blob/master/images/5.jpg" width="150" /> <img src="https://github.com/agaperra/driver_s_info/blob/master/images/6.jpg" width="150" /> <img src="https://github.com/agaperra/driver_s_info/blob/master/images/7.jpg" width="150" />
 ### by @agaperra
