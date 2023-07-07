@@ -5,6 +5,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import ru.agaperra.driversinfo.data.dataOptions.DataOptions
 import ru.agaperra.driversinfo.domain.repository.SharedPreferencesRepository
 import javax.inject.Inject
 
@@ -27,6 +28,21 @@ class MainViewModel @Inject constructor(
     fun getAll() = sharedPreferencesRepository.getAll()
     fun saveAll() = sharedPreferencesRepository.saveAll()
     fun getEnd() = sharedPreferencesRepository.getEnd()
+
+    fun changeLatinForCyrillic(letter: CharSequence, listCyrillic: List<CharSequence>, listLatin: List<CharSequence?>): CharSequence {
+        return listCyrillic[listLatin.indexOf(letter)]
+    }
+
+    fun ifLetterInCyrillicOrInLatin(letter: CharSequence, list: List<CharSequence?>): Boolean {
+        return list.contains(letter)
+    }
+
+    fun ifLetterInNumbers(letter: Int?): Boolean? {
+        return if (letter == null){
+            null
+        } else DataOptions.numberList.contains(letter)
+    }
+
 
     companion object {
         const val NUMBER = "NUMBER"

@@ -1,5 +1,6 @@
-package ru.agaperra.driversinfo.ui.screens
+package ru.agaperra.driversinfo.ui.components
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -60,7 +61,7 @@ fun BaseContent(
     ) {
         mainViewModel.onDialogConfirm()
         mainViewModel.saveData(null, key)
-        if (key == DL)  mainViewModel.saveEnd(true)
+        if (key == DL) mainViewModel.saveEnd(true)
         navController.popBackStack()
         navController.navigate(nextScreen) {
             popUpTo(navController.graph.startDestinationId)
@@ -137,34 +138,38 @@ fun BaseContent(
                         }
                     }
                 }
-
-                if (text.value.replace(" ", "").isNotEmpty()) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp, 20.dp, 16.dp, 0.dp)
-                    ) {
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Button(
-                                modifier = Modifier.fillMaxWidth(0.7f),
-                                onClick = {
-
-                                    doOnSave(text.value.replace(" ", "").uppercase())
-                                },
-                                colors = ButtonDefaults.buttonColors(backgroundColor = isDark),
-                                shape = RoundedCornerShape(10.dp),
+                Crossfade(text.value.replace(" ", "").isNotEmpty()) {
+                    when (it) {
+                        true -> {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp, 20.dp, 16.dp, 0.dp)
                             ) {
-                                Text(
-                                    text = stringResource(R.string.save),
-                                    color = notIsDark,
-                                    fontSize = 18.sp,
-                                    textAlign = TextAlign.Center
-                                )
+                                Column(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Button(
+                                        modifier = Modifier.fillMaxWidth(0.7f),
+                                        onClick = {
+
+                                            doOnSave(text.value.replace(" ", "").uppercase())
+                                        },
+                                        colors = ButtonDefaults.buttonColors(backgroundColor = isDark),
+                                        shape = RoundedCornerShape(10.dp),
+                                    ) {
+                                        Text(
+                                            text = stringResource(R.string.save),
+                                            color = notIsDark,
+                                            fontSize = 18.sp,
+                                            textAlign = TextAlign.Center
+                                        )
+                                    }
+                                }
                             }
                         }
+                        false -> {}
                     }
                 }
             }

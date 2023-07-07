@@ -164,42 +164,4 @@ object DataOptions {
             RegexOption.IGNORE_CASE
         ),
     )
-
-    fun changeLatinForCyrillic(letter: CharSequence): CharSequence {
-        return cyrillicLetterList[latinLetterList.indexOf(letter)]
-    }
-
-    fun changeLatinForCyrillicVRC(letter: CharSequence): CharSequence {
-        return cyrillicLetterListForVRC[latinLetterListForVRC.indexOf(letter)]
-    }
-    fun changeLatinForCyrillicDL(letter: CharSequence): CharSequence {
-        return cyrillicLetterListForDL[latinLetterListForDL.indexOf(letter)]
-    }
-
-    fun ifLetterInLatin(letter: CharSequence): Boolean {
-        return latinLetterList.contains(letter)
-    }
-    fun ifLetterInCyrillic(letter: CharSequence): Boolean {
-        return cyrillicLetterList.contains(letter)
-    }
-
-    fun ifLetterInLatinVRC(letter: CharSequence): Boolean {
-        return latinLetterListForVRC.contains(letter)
-    }
-    fun ifLetterInCyrillicVRC(letter: CharSequence): Boolean {
-        return cyrillicLetterListForVRC.contains(letter)
-    }
-
-    fun ifLetterInLatinDL(letter: CharSequence): Boolean {
-        return latinLetterListForDL.contains(letter)
-    }
-    fun ifLetterInCyrillicDL(letter: CharSequence): Boolean {
-        return cyrillicLetterListForDL.contains(letter)
-    }
-
-    fun ifLetterInNumbers(letter: Int?): Boolean? {
-        return if (letter == null){
-            null
-        } else numberList.contains(letter)
-    }
 }

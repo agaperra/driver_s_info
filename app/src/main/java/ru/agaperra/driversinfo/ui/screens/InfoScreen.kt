@@ -17,7 +17,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -25,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import ru.agaperra.driversinfo.MainViewModel
 import ru.agaperra.driversinfo.R
+import ru.agaperra.driversinfo.ui.components.InfoContent
 import ru.agaperra.driversinfo.ui.dialogs.SkipDialog
 import ru.agaperra.driversinfo.ui.navigation.Screen
 import ru.agaperra.driversinfo.ui.theme.Coral
@@ -67,108 +67,9 @@ fun InfoScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp, 20.dp, 16.dp, 0.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = stringResource(R.string.car_number),
-                            color = Color.White,
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp, 20.dp, 16.dp, 0.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = if (mainViewModel.getAll()[0].isNullOrEmpty()) stringResource(R.string.no_data) else mainViewModel.getAll()[0]!!,
-                            color = PurpleDark,
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp, 20.dp, 16.dp, 0.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = stringResource(R.string.vrc_number),
-                            color = Color.White,
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp, 20.dp, 16.dp, 0.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = if (mainViewModel.getAll()[1].isNullOrEmpty()) stringResource(R.string.no_data) else mainViewModel.getAll()[1]!!,
-                            color = PurpleDark,
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp, 20.dp, 16.dp, 0.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = stringResource(R.string.dl_number),
-                            color = Color.White,
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp, 20.dp, 16.dp, 0.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = if (mainViewModel.getAll()[2].isNullOrEmpty()) stringResource(R.string.no_data) else mainViewModel.getAll()[2]!!,
-                            color = PurpleDark,
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
+                InfoContent(mainViewModel.getAll()[0], R.string.car_number)
+                InfoContent(mainViewModel.getAll()[1], R.string.vrc_number)
+                InfoContent(mainViewModel.getAll()[2], R.string.dl_number)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

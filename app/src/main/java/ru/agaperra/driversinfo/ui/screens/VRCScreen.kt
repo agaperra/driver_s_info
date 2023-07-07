@@ -1,13 +1,17 @@
 package ru.agaperra.driversinfo.ui.screens
 
-import android.widget.Toast
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.navigation.NavController
 import ru.agaperra.driversinfo.MainViewModel
 import ru.agaperra.driversinfo.MainViewModel.Companion.VRC
 import ru.agaperra.driversinfo.R
-import ru.agaperra.driversinfo.data.dataOptions.DataOptions
+import ru.agaperra.driversinfo.data.dataOptions.DataOptions.cyrillicLetterListForVRC
+import ru.agaperra.driversinfo.data.dataOptions.DataOptions.latinLetterListForVRC
+import ru.agaperra.driversinfo.data.dataOptions.DataOptions.patternForVRC
+import ru.agaperra.driversinfo.ui.components.BaseContent
+import ru.agaperra.driversinfo.ui.components.ScreenData
 import ru.agaperra.driversinfo.ui.navigation.Screen
 
 @Composable
@@ -15,7 +19,9 @@ fun VRCScreen(
     navController: NavController,
     mainViewModel: MainViewModel
 ) {
-    val context = LocalContext.current
+
+    val isShow = remember { mutableStateOf(false) }
+    val string = remember { mutableStateOf("") }
 
     BaseContent(
         navController,
@@ -27,42 +33,23 @@ fun VRCScreen(
         doOnSkip = {
             mainViewModel.onOpenDialogClicked()
         },
-        doOnSave = { string ->
-            var count = 0
-            for (i in DataOptions.patternForVRC.indices) {
-                if (DataOptions.patternForVRC[i].matches(string)) {
-                    val array: Array<String> =
-                        string.toCharArray().map { it.toString() }.toTypedArray()
-                    val newList = array.map {
-                        if (DataOptions.ifLetterInLatinVRC(it))
-                            DataOptions.changeLatinForCyrillicVRC(it)
-                        else if (DataOptions.ifLetterInCyrillicVRC(it))
-                            it
-                        else if (DataOptions.ifLetterInNumbers(it.toIntOrNull()) != null &&
-                            DataOptions.ifLetterInNumbers(it.toIntOrNull())!!
-                        )
-                            it
-                        else null
-                    }
-                    if (newList.contains(null)) {
-                        continue
-                    } else {
-                        newList.joinToString("")
-                        mainViewModel.saveData(newList.joinToString(""), VRC)
-                        navController.popBackStack()
-                        navController.navigate(Screen.DLScreen.route) {
-                            popUpTo(navController.graph.startDestinationId)
-                            launchSingleTop = true
-                        }
-                        break
-                    }
-                } else {
-                    count++
-                }
-            }
-            if (count == DataOptions.patternForVRC.size) {
-                Toast.makeText(context, context.getString(R.string.error_vrc), Toast.LENGTH_SHORT)
-                    .show()
-            }
+        doOnSave = { str ->
+            string.value = str
+            isShow.value = true
         })
+    if (isShow.value) {
+
+        ScreenData(
+            string.value,
+            mainViewModel,
+            patternForVRC,
+            latinLetterListForVRC,
+            cyrillicLetterListForVRC,
+            navController,
+            Screen.DLScreen.route,
+            VRC,
+            R.string.error_vrc
+        )
+    }
+
 }
