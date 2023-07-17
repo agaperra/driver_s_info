@@ -5,15 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.NavController
 import ru.agaperra.driversinfo.MainViewModel
-import ru.agaperra.driversinfo.MainViewModel.Companion.DL
 import ru.agaperra.driversinfo.R
-import ru.agaperra.driversinfo.data.dataOptions.DataOptions
 import ru.agaperra.driversinfo.ui.components.BaseContent
 import ru.agaperra.driversinfo.ui.components.ScreenData
 import ru.agaperra.driversinfo.ui.navigation.Screen
 
 @Composable
-fun DLScreen(
+fun CertificateScreen(
     navController: NavController,
     mainViewModel: MainViewModel
 ) {
@@ -24,29 +22,25 @@ fun DLScreen(
     BaseContent(
         navController,
         mainViewModel,
-        R.string.enter_dl,
-        R.string.dl_number,
-        nextScreen = Screen.InfoScreen.route,
-        key = DL,
+        R.string.enter_vrc,
+        R.string.vrc_number,
+        nextScreen = Screen.LicenseScreen.route,
+        currentScreen = Screen.CertificateScreen.route,
         doOnSkip = {
-            mainViewModel.onOpenDialogClicked()
+            mainViewModel.onOpenSkipDialogClicked()
         },
-        doOnSave = { str ->
-            string.value = str
+        doOnSaveData = {
+            string.value = it
             isShow.value = true
         })
     if (isShow.value) {
-
         ScreenData(
             string.value,
             mainViewModel,
-            DataOptions.patternForDL,
-            DataOptions.latinLetterListForDL,
-            DataOptions.cyrillicLetterListForDL,
             navController,
-            Screen.InfoScreen.route,
-            DL,
-            R.string.error_dl
+            Screen.LicenseScreen.route,
+            R.string.error_vrc
         )
     }
+
 }

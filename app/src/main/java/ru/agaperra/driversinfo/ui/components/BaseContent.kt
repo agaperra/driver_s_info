@@ -28,9 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import ru.agaperra.driversinfo.MainViewModel
-import ru.agaperra.driversinfo.MainViewModel.Companion.DL
 import ru.agaperra.driversinfo.R
-import ru.agaperra.driversinfo.ui.dialogs.SkipDialog
+import ru.agaperra.driversinfo.ui.dialogs.ApplicationDialog
 import ru.agaperra.driversinfo.ui.theme.Coral
 import ru.agaperra.driversinfo.ui.theme.Milk
 import ru.agaperra.driversinfo.ui.theme.PurpleDark
@@ -43,25 +42,24 @@ fun BaseContent(
     stringTitle: Int,
     stringPlaceholder: Int,
     nextScreen: String,
-    key: String,
+    currentScreen: String,
     doOnSkip: () -> Unit,
-    doOnSave: (String) -> Unit,
+    doOnSaveData: (String)->Unit
 ) {
     val text = remember {
         mutableStateOf("")
     }
-    val showDialogState: Boolean by mainViewModel.showDialog.collectAsState()
+    val showDialogState: Boolean by mainViewModel.showSkipDialog.collectAsState()
 
-    SkipDialog(
+    ApplicationDialog(
         show = showDialogState,
         confirmTitle = R.string.skip,
         dismissTitle = R.string.cancel,
         title = R.string.sure,
-        onDismiss = mainViewModel::onDialogDismiss
+        onDismiss = mainViewModel::onSkipDialogDismiss
     ) {
-        mainViewModel.onDialogConfirm()
-        mainViewModel.saveData(null, key)
-        if (key == DL) mainViewModel.saveEnd(true)
+        mainViewModel.onSkipDialogConfirm()
+        mainViewModel.saveDataOnScreen(currentScreen, null)
         navController.popBackStack()
         navController.navigate(nextScreen) {
             popUpTo(navController.graph.startDestinationId)
@@ -69,7 +67,7 @@ fun BaseContent(
         }
     }
 
-    Box() {
+    Box {
         Surface(
             modifier = Modifier
                 .fillMaxSize(),
@@ -153,8 +151,7 @@ fun BaseContent(
                                     Button(
                                         modifier = Modifier.fillMaxWidth(0.7f),
                                         onClick = {
-
-                                            doOnSave(text.value.replace(" ", "").uppercase())
+                                            doOnSaveData(text.value.replace(" ", "").uppercase())
                                         },
                                         colors = ButtonDefaults.buttonColors(backgroundColor = isDark),
                                         shape = RoundedCornerShape(10.dp),

@@ -10,10 +10,10 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.agaperra.driversinfo.MainViewModel
-import ru.agaperra.driversinfo.ui.screens.DLScreen
+import ru.agaperra.driversinfo.ui.screens.CertificateScreen
 import ru.agaperra.driversinfo.ui.screens.InfoScreen
-import ru.agaperra.driversinfo.ui.screens.NumberScreen
-import ru.agaperra.driversinfo.ui.screens.VRCScreen
+import ru.agaperra.driversinfo.ui.screens.LicenseScreen
+import ru.agaperra.driversinfo.ui.screens.VehicleNumberScreen
 
 @ExperimentalComposeUiApi
 @ExperimentalCoroutinesApi
@@ -26,37 +26,37 @@ fun SetupNavigation(mainViewModel: MainViewModel) {
         rememberAnimatedNavController()
 
     val start =
-        if (mainViewModel.getEnd()) Screen.InfoScreen.route else Screen.NumberScreen.route
+        if (mainViewModel.getUserEndState()) Screen.InfoScreen.route else Screen.VehicleScreen.route
 
     com.google.accompanist.navigation.animation.AnimatedNavHost(
         navController = navHostController,
         startDestination = start
     ) {
         composable(
-            route = Screen.NumberScreen.route,
+            route = Screen.VehicleScreen.route,
             exitTransition = {
                 fadeOut(animationSpec = tween(durationMillis = 1000))
             },
             content = {
-                NumberScreen(navHostController, mainViewModel)
+                VehicleNumberScreen(navHostController, mainViewModel)
             }
         )
         composable(
-            route = Screen.VRCScreen.route,
+            route = Screen.CertificateScreen.route,
             exitTransition = {
                 fadeOut(animationSpec = tween(durationMillis = 1000))
             },
             content = {
-                VRCScreen(navHostController, mainViewModel)
+                CertificateScreen(navHostController, mainViewModel)
             }
         )
         composable(
-            route = Screen.DLScreen.route,
+            route = Screen.LicenseScreen.route,
             exitTransition = {
                 fadeOut(animationSpec = tween(durationMillis = 1000))
             },
             content = {
-                DLScreen(navHostController, mainViewModel)
+                LicenseScreen(navHostController, mainViewModel)
             }
         )
         composable(

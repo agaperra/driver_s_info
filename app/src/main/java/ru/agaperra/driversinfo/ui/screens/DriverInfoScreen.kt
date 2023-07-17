@@ -25,7 +25,7 @@ import androidx.navigation.NavController
 import ru.agaperra.driversinfo.MainViewModel
 import ru.agaperra.driversinfo.R
 import ru.agaperra.driversinfo.ui.components.InfoContent
-import ru.agaperra.driversinfo.ui.dialogs.SkipDialog
+import ru.agaperra.driversinfo.ui.dialogs.ApplicationDialog
 import ru.agaperra.driversinfo.ui.navigation.Screen
 import ru.agaperra.driversinfo.ui.theme.Coral
 import ru.agaperra.driversinfo.ui.theme.Milk
@@ -38,25 +38,27 @@ fun InfoScreen(
     mainViewModel: MainViewModel
 ) {
 
-    val showDialogState: Boolean by mainViewModel.showDialog.collectAsState()
+    val showUpdateDialogState: Boolean by mainViewModel.showUpdateDialog.collectAsState()
 
-    SkipDialog(
-        show = showDialogState,
+    ApplicationDialog(
+        show = showUpdateDialogState,
         confirmTitle = R.string.ask_update_short,
         dismissTitle = R.string.cancel,
         title = R.string.update,
-        onDismiss = mainViewModel::onDialogDismiss
+        onDismiss = mainViewModel::onUpdateDialogDismiss
     ) {
-        mainViewModel.saveAll()
-        mainViewModel.onDialogConfirm()
+        mainViewModel.deleteDriversInfo()
+        mainViewModel.onUpdateDialogConfirm()
         navController.popBackStack()
-        navController.navigate(Screen.NumberScreen.route) {
+        navController.navigate(Screen.VehicleScreen.route) {
             popUpTo(navController.graph.startDestinationId)
             launchSingleTop = true
         }
     }
     val isDark = if (isSystemInDarkTheme()) Milk else PurpleDark
     val notIsDark = if (isSystemInDarkTheme()) PurpleDark else Milk
+    val driversInfo = mainViewModel.getDriversInfo()
+
 
     Box() {
         Surface(
@@ -67,9 +69,9 @@ fun InfoScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                InfoContent(mainViewModel.getAll()[0], R.string.car_number)
-                InfoContent(mainViewModel.getAll()[1], R.string.vrc_number)
-                InfoContent(mainViewModel.getAll()[2], R.string.dl_number)
+                InfoContent(driversInfo.vehicleNumber, R.string.car_number)
+                InfoContent(driversInfo.certificateNumber, R.string.vrc_number)
+                InfoContent(driversInfo.licenseNumber, R.string.dl_number)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -82,7 +84,7 @@ fun InfoScreen(
                         Button(
                             modifier = Modifier.fillMaxWidth(0.7f),
                             onClick = {
-                                mainViewModel.onOpenDialogClicked()
+                                mainViewModel.onUpdateSkipDialogClicked()
                             },
                             colors = ButtonDefaults.buttonColors(backgroundColor = isDark),
                             shape = RoundedCornerShape(10.dp),
